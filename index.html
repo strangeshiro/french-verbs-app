@@ -3,28 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>French Verbs — Support</title>
-<link rel="stylesheet" href="style.css">
+<title>French Verbs: Top 100</title>
+<meta name="description" content="Learn the 100 most common French verbs — grouped by theme, with présent conjugations, pronunciation and quick quizzes. Offline, no ads, no tracking.">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<meta property="og:title" content="French Verbs: Top 100">
+<meta property="og:description" content="The 100 French verbs you'll use every day — grouped by theme, with conjugations and a quick quiz to make them stick.">
+<meta property="og:image" content="img/icon.png">
+<style>
+:root {
+  color-scheme: light dark;
+  --navy: #1b2a6b;
+  --navy-deep: #121a45;
+  --blue: #0055d4;
+  --red: #ef3a40;
+  --bg: #f4f4f7;
+  --card: #ffffff;
+  --fg: #14161f;
+  --muted: #5f6475;
+  --line: #e3e4ea;
+  --green: #34c759;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1028;
+    --card: #171b3a;
+    --fg: #eef0fa;
+    --muted: #a3a8c3;
+    --line: #262b52;
+    --blue: #5b8cff;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--blue); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* Nav */
+nav { position: absolute; inset: 0 0 auto 0; z-index: 2; }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 600; }
+.brand img { width: 32px; height: 32px; border-radius: 8px; }
+nav .links a { color: rgba(255,255,255,.8); text-decoration: none; margin-left: 20px; font-size: .95rem; }
+nav .links a:hover { color: #fff; }
+
+/* Hero */
+.hero {
+  background: radial-gradient(1200px 500px at 80% 0%, #2d3f94 0%, transparent 60%),
+              linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: #fff;
+  padding: 120px 0 0;
+}
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; }
+.hero-text { padding-bottom: 96px; }
+.flag { display: flex; width: 120px; height: 10px; border-radius: 5px; overflow: hidden; margin-bottom: 28px; }
+.flag span { flex: 1; }
+.flag span:nth-child(1) { background: #0055d4; }
+.flag span:nth-child(2) { background: #fff; }
+.flag span:nth-child(3) { background: var(--red); }
+h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.05; letter-spacing: -.02em; margin: 0 0 20px;
+}
+h1 em { font-style: normal; color: #9fb6ff; }
+.lead { font-size: 1.2rem; color: rgba(255,255,255,.82); max-width: 32em; margin: 0 0 32px; }
+.cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.store {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #fff; color: #000; text-decoration: none;
+  padding: 12px 22px; border-radius: 14px; font-weight: 600;
+}
+.store svg { width: 22px; height: 22px; }
+.store small { display: block; font-size: .7rem; font-weight: 500; opacity: .7; line-height: 1; }
+.store span { line-height: 1.15; }
+.soon { font-size: .9rem; color: rgba(255,255,255,.65); }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.badges span {
+  font-size: .85rem; padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,.1); color: rgba(255,255,255,.9);
+}
+.hero-phone { display: flex; justify-content: center; }
+
+/* Phone frame */
+.phone {
+  width: 100%; max-width: 300px;
+  border-radius: 44px; padding: 10px;
+  background: #0a0a0f;
+  box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2a2a33;
+}
+.phone img { display: block; width: 100%; border-radius: 34px; }
+.hero .phone { margin-bottom: -120px; transform: rotate(-3deg); }
+
+/* Sections */
+section { padding: 96px 0; }
+.hero + section { padding-top: 168px; }
+.eyebrow { color: var(--blue); font-weight: 600; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); letter-spacing: -.02em; line-height: 1.1; margin: 0 0 16px; }
+.sub { color: var(--muted); font-size: 1.1rem; max-width: 36em; margin: 0; }
+
+/* Feature grid */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+.card .ico { font-size: 1.6rem; margin-bottom: 12px; }
+.card h3 { margin: 0 0 6px; font-size: 1.1rem; }
+.card p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+/* Showcase rows */
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.row + .row { margin-top: 96px; }
+.row.flip .row-text { order: 2; }
+.row .phone { margin: 0 auto; }
+.row-text ul { padding: 0; list-style: none; margin: 24px 0 0; }
+.row-text li { padding-left: 28px; position: relative; margin-bottom: 10px; color: var(--muted); }
+.row-text li b { color: var(--fg); }
+.row-text li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+/* Conjugation demo */
+.conj {
+  margin-top: 24px; background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; overflow: hidden; max-width: 380px;
+}
+.conj button {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  display: flex; justify-content: space-between; width: 100%;
+  padding: 11px 18px; border-bottom: 1px solid var(--line);
+}
+.conj button:last-child { border-bottom: 0; }
+.conj button:hover, .conj button:focus-visible { background: rgba(91,140,255,.1); }
+.conj .p { color: var(--muted); }
+.conj .f { font-weight: 600; }
+.conj .f::after { content: " 🔊"; font-size: .8em; opacity: .55; }
+.hint { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+
+/* Themes */
+.themes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+.themes span {
+  background: var(--card); border: 1px solid var(--line);
+  padding: 10px 16px; border-radius: 999px; font-size: .95rem;
+}
+.themes b { color: var(--blue); margin-right: 6px; }
+
+/* Private band */
+.band {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: #fff; border-radius: 28px; padding: 56px 48px; text-align: center;
+}
+.band h2 { margin-bottom: 12px; }
+.band p { color: rgba(255,255,255,.8); max-width: 34em; margin: 0 auto 28px; font-size: 1.1rem; }
+.band .cta { justify-content: center; }
+
+/* FAQ */
+.faq { max-width: 720px; margin-top: 32px; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 4px 20px; margin-bottom: 10px; }
+summary { cursor: pointer; font-weight: 600; padding: 14px 28px 14px 0; list-style: none; position: relative; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; position: absolute; right: 0; top: 10px; font-size: 1.4rem; color: var(--muted); }
+details[open] summary::after { content: "–"; }
+details p { margin: 0 0 16px; color: var(--muted); }
+
+footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; }
+footer a { color: var(--muted); }
+
+@media (max-width: 860px) {
+  .hero { padding-top: 96px; }
+  .hero .wrap, .row { grid-template-columns: 1fr; }
+  .hero-text { padding-bottom: 40px; }
+  .hero .phone { max-width: 240px; margin-bottom: -100px; }
+  .hero + section { padding-top: 140px; }
+  .grid { grid-template-columns: 1fr; }
+  .row { gap: 40px; }
+  .row.flip .row-text { order: 0; }
+  .row .phone { max-width: 260px; }
+  section { padding: 64px 0; }
+  .band { padding: 40px 22px; }
+  nav .links a:not(:last-child) { display: none; }
+}
+</style>
 </head>
 <body>
-<main>
-  <h1>French Verbs</h1>
-  <p>Learn the 100 most common French verbs — grouped into 10 themes, with English translations and présent conjugations.</p>
-  <ul>
-    <li><strong>Two quiz modes for every group:</strong> pick the right translation, or fill in “nous ___” with the right présent form.</li>
-    <li><strong>Hear every verb:</strong> tap the speaker, or tap any form to hear it with its pronoun — “nous avons”, “j’ai”.</li>
-    <li><strong>Track your progress:</strong> learned verbs get a check mark, tricky ones are flagged for review, and each group keeps your best score.</li>
-  </ul>
 
-  <h2>Support</h2>
-  <p>Found a mistake in a translation or conjugation, or have an idea? <a href="https://github.com/strangeshiro/french-verbs-app/issues">Open an issue on GitHub</a> — every report is read.</p>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="img/icon.png" alt="">French Verbs</a>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#themes">Themes</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
 
-  <h2>FAQ</h2>
-  <p><strong>Does the app need an internet connection?</strong><br>No, everything works offline.</p>
-  <p><strong>Is my progress saved?</strong><br>Yes, on your device: learned verbs and best scores are kept between launches. To start over, open the menu (⋯) and tap “Reset progress”.</p>
-  <p><strong>How do I get a better French voice?</strong><br>The app uses the best French voice installed on your iPhone. For a more natural one, go to Settings → Accessibility → Spoken Content → Voices → French (France) and download a voice marked Enhanced or Premium.</p>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="flag" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h1>The 100 French verbs you'll <em>actually use.</em></h1>
+      <p class="lead">Learn what they mean, how they conjugate and how they sound — grouped by theme, with quick quizzes that make them stick.</p>
+      <div class="cta">
+        <a class="store" href="#faq" aria-label="App Store — coming soon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.86-.76-1.47.02-2.83.86-3.59 2.17-1.53 2.66-.39 6.6 1.1 8.75.73 1.05 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.51zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.64-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>
+          <span><small>Coming soon on the</small>App Store</span>
+        </a>
+        <span class="soon">Free · iPhone</span>
+      </div>
+      <div class="badges">
+        <span>🇫🇷 100 verbs</span><span>🔊 Pronunciation</span><span>✈️ Works offline</span><span>🔒 No tracking</span>
+      </div>
+    </div>
+    <div class="hero-phone">
+      <div class="phone"><img src="img/1-list.jpg" alt="Verb list grouped by theme, with progress: 21 of 100 learned"></div>
+    </div>
+  </div>
+</header>
 
-  <p><a href="privacy.html">Privacy Policy</a></p>
-</main>
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">Why it works</p>
+    <h2>A small set of verbs carries most of everyday French.</h2>
+    <p class="sub">Être, avoir, faire, aller, pouvoir… Master the top 100 and you can understand and build most of the sentences you need.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">🗂️</div><h3>Grouped by meaning</h3><p>10 themes of 10 verbs — speech, movement, emotions and more. Related words are easier to remember together.</p></div>
+      <div class="card"><div class="ico">📖</div><h3>Présent conjugations</h3><p>All six forms for every verb, including the irregular ones like aller, faire and pouvoir.</p></div>
+      <div class="card"><div class="ico">🔊</div><h3>Hear every form</h3><p>Tap a verb or any form to hear it with its pronoun — “nous avons”, “j’ai”. Uses the built-in French voice, offline.</p></div>
+      <div class="card"><div class="ico">🎯</div><h3>Two quiz modes</h3><p>Vocabulary: pick the right translation. Conjugation: fill in “nous ___” with the right form.</p></div>
+      <div class="card"><div class="ico">📈</div><h3>Progress that sticks</h3><p>Learned verbs get a check mark, tricky ones are flagged for review, and every group keeps your best score.</p></div>
+      <div class="card"><div class="ico">🔍</div><h3>Instant search</h3><p>Find any verb by its French or English meaning in a second.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row">
+      <div class="row-text">
+        <p class="eyebrow">Learn</p>
+        <h2>Every verb, every form, out loud.</h2>
+        <p class="sub">Open any verb to see its six présent forms. Tap one to hear it — try it here:</p>
+        <div class="conj" id="conj">
+          <button data-say="je suis"><span class="p">je</span><span class="f">suis</span></button>
+          <button data-say="tu es"><span class="p">tu</span><span class="f">es</span></button>
+          <button data-say="il est"><span class="p">il / elle / on</span><span class="f">est</span></button>
+          <button data-say="nous sommes"><span class="p">nous</span><span class="f">sommes</span></button>
+          <button data-say="vous êtes"><span class="p">vous</span><span class="f">êtes</span></button>
+          <button data-say="ils sont"><span class="p">ils / elles</span><span class="f">sont</span></button>
+        </div>
+        <p class="hint" id="hint">être — to be</p>
+      </div>
+      <div class="phone"><img src="img/2-verb.jpg" alt="Verb detail screen with présent conjugation and speaker buttons" loading="lazy"></div>
+    </div>
+
+    <div class="row flip">
+      <div class="row-text">
+        <p class="eyebrow">Practice</p>
+        <h2>Quizzes that test what you really know.</h2>
+        <p class="sub">Each quiz covers one theme. The wrong options are chosen to make you think, not guess.</p>
+        <ul>
+          <li><b>Vocabulary</b> — four translations from the same theme, so you can't rely on elimination.</li>
+          <li><b>Conjugation</b> — the wrong answers are other forms of the same verb, so you have to know the ending.</li>
+          <li>See your score, review your mistakes and retry just those.</li>
+        </ul>
+      </div>
+      <div class="phone"><img src="img/5-conjugation.jpg" alt="Conjugation quiz: choose the présent form" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section id="themes">
+  <div class="wrap">
+    <p class="eyebrow">What's inside</p>
+    <h2>10 themes × 10 verbs.</h2>
+    <p class="sub">Start with the core and work your way out — or jump to whatever you need today.</p>
+    <div class="themes">
+      <span><b>1</b>Core &amp; Most Frequent</span>
+      <span><b>2</b>Speech &amp; Communication</span>
+      <span><b>3</b>Perception &amp; Thought</span>
+      <span><b>4</b>Movement</span>
+      <span><b>5</b>Physical Actions</span>
+      <span><b>6</b>Life, States &amp; Emotions</span>
+      <span><b>7</b>Everyday Activities</span>
+      <span><b>8</b>Giving &amp; Waiting</span>
+      <span><b>9</b>Decisions &amp; Outcomes</span>
+      <span><b>10</b>Creation &amp; Skill</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="band">
+      <h2>Private. Offline. No ads.</h2>
+      <p>No account, no tracking, no internet connection needed. Your progress stays on your iPhone.</p>
+      <div class="cta">
+        <a class="store" href="#faq" aria-label="App Store — coming soon">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.86-.76-1.47.02-2.83.86-3.59 2.17-1.53 2.66-.39 6.6 1.1 8.75.73 1.05 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.84-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.51zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.64-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>
+          <span><small>Coming soon on the</small>App Store</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Support</p>
+    <h2>Questions &amp; help</h2>
+    <p class="sub">Found a mistake in a translation or conjugation, or have an idea? <a href="https://github.com/strangeshiro/french-verbs-app/issues">Open an issue on GitHub</a> — every report is read.</p>
+    <div class="faq">
+      <details open>
+        <summary>Does the app need an internet connection?</summary>
+        <p>No, everything works offline.</p>
+      </details>
+      <details>
+        <summary>Is my progress saved?</summary>
+        <p>Yes, on your device: learned verbs and best scores are kept between launches. To start over, open the menu (⋯) and tap “Reset progress”.</p>
+      </details>
+      <details>
+        <summary>How do I get a better French voice?</summary>
+        <p>The app uses the best French voice installed on your iPhone. For a more natural one, go to Settings → Accessibility → Spoken Content → Voices → French (France) and download a voice marked Enhanced or Premium.</p>
+      </details>
+      <details>
+        <summary>Which tenses are covered?</summary>
+        <p>Version 1.0 focuses on the présent — the tense you need first and use most.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 French Verbs</span>
+    <span><a href="privacy.html">Privacy Policy</a> · <a href="https://github.com/strangeshiro/french-verbs-app/issues">Support</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  if (!("speechSynthesis" in window)) return;
+  function frVoice() {
+    var vs = speechSynthesis.getVoices();
+    return vs.find(function (v) { return v.lang === "fr-FR"; }) ||
+           vs.find(function (v) { return v.lang && v.lang.indexOf("fr") === 0; });
+  }
+  document.getElementById("hint").textContent = "être — to be · tap a form to hear it";
+  document.getElementById("conj").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(b.dataset.say);
+    u.lang = "fr-FR";
+    u.rate = 0.9;
+    var v = frVoice();
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  });
+})();
+</script>
 </body>
 </html>
